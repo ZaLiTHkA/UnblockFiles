@@ -8,13 +8,13 @@ this module is not currently published to the PSGallery, it may be one day, but 
 
 execute the following command in a PowerShell prompt to install it locally:
 
-```
+```pwsh
 irm https://raw.githubusercontent.com/ZaLiTHkA/UnblockFiles/main/install-unblock-module.ps1 | iex
 ```
 
 it will automatically invoke `Import-Module` at the end, so you may execute `Unblock-Files` immediately thereafter. but this is not a persistent change, so to import and use this module again in a new prompt, you will need to execute the following command first:
 
-```
+```pwsh
 Import-Module UnblockFiles -Force
 ```
 
@@ -22,8 +22,8 @@ Import-Module UnblockFiles -Force
 
 this module is designed to be as flexible as possible, operating from the current working directory by default at runtime. but you may also provide a specific path to start from at launch.
 
-```
-UnblockFiles -Path <custom/working/directory>
+```pwsh
+Unblock-Files -Path <custom/working/directory>
 ```
 
 when executed, this will first list all files and folders in the working directory. navigate the list with the up and down arrows, and use spacebar to toggle the inclusion of a file or folder.
@@ -33,6 +33,6 @@ when executed, this will first list all files and folders in the working directo
 
 if you need to limit the recursion depth in a folder, you may do so with the `-Depth` argument, such as the following which will only recurse 2 levels deep into folders:
 
-```
-UnblockFiles -Depth 2
+```pwsh
+Unblock-Files -Depth 2
 ```
