@@ -11,7 +11,7 @@ this module is not currently published to the PSGallery, it may be one day, but 
 execute the following command in a PowerShell prompt to install it locally:
 
 ```pwsh
-irm https://raw.githubusercontent.com/ZaLiTHkA/UnblockFiles/main/install-unblock-module.ps1 | iex
+irm https://raw.githubusercontent.com/ZaLiTHkA/UnblockFiles/main/scripts/install-module.ps1 | iex
 ```
 
 once installed, this module may be imported into any PowerShell session with the following command:
