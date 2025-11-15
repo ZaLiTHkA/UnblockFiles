@@ -1,6 +1,8 @@
 # PowerShell Unblock File Helper
 
-the sole purpose of this script is to simplify the process of running `Unblock-File` on one or more files in one or more potentially nested folders.
+the primary purpose of this script is to simplify the process of running `Unblock-File` on one or more files, potentially inside nested folders.
+
+it is built as a PowerShell module for the sake of portability, in the sense that, once loaded, it's functions may be executed from any directory.
 
 ## Module Installation
 
@@ -15,7 +17,7 @@ irm https://raw.githubusercontent.com/ZaLiTHkA/UnblockFiles/main/install-unblock
 once installed, this module may be imported into any PowerShell session with the following command:
 
 ```pwsh
-Import-Module UnblockFiles -Force
+Import-Module UnblockFiles
 ```
 
 > NOTE: this is done automatically at the end of the installation, but it is not a persistent system change. you will need to call this again if you open a new terminal session.
@@ -30,30 +32,22 @@ the easiest way to use this, is to open a PowerShell session in the directory wh
 Unblock-Files
 ```
 
-this will find all files and folders in the current working directory, and present a list of checkbox items for you to select.
+with no arguments provided, this will simply execute your system's `Unblock-File` command on each file in the current working directory.
 
-- navigate with the arrow keys.
-- toggle items with "spacebar".
-- confirm selection with "enter".
+## Runtime Arguments
 
-if a folder is selected, the script will recurse into that folder and try to "unblock" every file it encounters.
+this module currently supports the following runtime arguments:
 
-at the end, you will see a message showing how many files were "unblock" in this way.
+- `-Path <path>`, which allows you to specify an alternate target directory to process.
+  - this path may be relative or absolute, or stored in an environment variable.
+  - if the path contains spaces, wrap it in double quotes.
+- `-Depth <int>`, which allows you to specify the depth that this script will recurse into the target directory.
+  - this defaults to `0`, meaning it will not recurse into any subdirectories.
+  - to allow infinite recursion, set this to `-1`.
 
-## Advanced Module Usage
+for example:
 
-if you cannot open a PowerShell session at the required path, you may provide this path at runtime with the `-Path` argument:
-
-```pwsh
-Unblock-Files -Path <custom/working/directory>
-```
-
-> NOTE: this path may be relative or absolute. if it contains spaces, enclose it with 'single quotes'.
-
-if you need to limit the recursion depth in any folder, you may do so with the `-Depth` argument:
-
-```pwsh
-Unblock-Files -Depth 2
-```
-
-> NOTE: this depth check applies from the script's working directory.
+- `Unblock-Files -Depth 3` will look 3 levels deep from the current working directory for files that could be unblocked.
+- `Unblock-Files -Path .\2025-10\` will look at the root contents of the `2025-11` folder in the current working directory, ignoring any sub-folders it may contain.
+- `Unblock-Files -Path "..\Other Folder\2024-11\" -Depth 2` will look 2 levels deep from a directory located inside of a sibling to the current working directory.
+- `Unblock-Files -Path "$HOME\Documents\Scanned Documents\"` will expand the variable and look at the root contents of a path in your current user "home" directory.
