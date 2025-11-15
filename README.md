@@ -45,9 +45,28 @@ this module currently supports the following runtime arguments:
   - this defaults to `0`, meaning it will not recurse into any subdirectories.
   - to allow infinite recursion, set this to `-1`.
 
-for example:
+## Usage Examples
 
-- `Unblock-Files -Depth 3` will look 3 levels deep from the current working directory for files that could be unblocked.
-- `Unblock-Files -Path .\2025-10\` will look at the root contents of the `2025-11` folder in the current working directory, ignoring any sub-folders it may contain.
-- `Unblock-Files -Path "..\Other Folder\2024-11\" -Depth 2` will look 2 levels deep from a directory located inside of a sibling to the current working directory.
-- `Unblock-Files -Path "$HOME\Documents\Scanned Documents\"` will expand the variable and look at the root contents of a path in your current user "home" directory.
+this will look 3 levels deep from the current working directory for files that could be unblocked:
+
+```pwsh
+Unblock-Files -Depth 3
+```
+
+this will look at the root contents of the `2025-11` folder in the current working directory, ignoring any sub-folders it may contain:
+
+```pwsh
+Unblock-Files -Path .\2025-10\
+```
+
+this will look 2 levels deep from a directory located inside of a sibling to the current working directory:
+
+```pwsh
+Unblock-Files -Path "..\Other Folder\2024-11\" -Depth 2
+```
+
+this will expand the variable and look at the root contents of a path in your current user "home" directory:
+
+```pwsh
+Unblock-Files -Path "$HOME\Documents\Scanned Documents\"
+```
